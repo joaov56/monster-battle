@@ -1,3 +1,54 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:prettier/recommended"
+
+  ],
+  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@next/next/no-html-link-for-pages": [
+          "error"
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@next/next/no-document-import-in-page": "off",
+        "no-restricted-syntax": "warn",
+        "react/jsx-no-bind": "off",
+        "prettier/prettier": ["error", { "endOfLine": "auto" }],
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/prop-types": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "no-unused-expressions": "off",
+        "camelcase": "off",
+        "no-use-before-define": ["error", { "variables": false }],
+        "react/jsx-curly-newline": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "react/react-in-jsx-scope": "off",
+        "import/prefer-default-export": "off",
+        "import/no-duplicates": "off",
+        "react/require-default-props": "off",
+        "import/no-extraneous-dependencies": "off"
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }
