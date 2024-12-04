@@ -45,6 +45,8 @@ export default function Home() {
     }
   ]);
 
+  const [selectedMonsters, setSelectedMonsters] = useState<Monster[]>([]);
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const headers = ["name", "attack", "defense", "speed", "hp"];
@@ -71,6 +73,13 @@ export default function Home() {
     setMonsters(monsters.filter(monster => monster.id !== id));
   }
 
+  function handleSelectMonster(id:string){   
+    const monster = monsters.find(monster => monster.id === id);
+    if(monster){
+      setSelectedMonsters([...selectedMonsters, monster]);
+    }
+  }
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <Card className="w-4/5 h-3/5">
@@ -78,13 +87,18 @@ export default function Home() {
           <CardTitle>Monstros</CardTitle>
           <div className="flex items-center">
             <InfoTooltip />
-            <Button onClick={handleModalChange}>Adicionar +</Button>
+            <Button onClick={handleModalChange} className="mr-4">Adicionar +</Button>
+            {selectedMonsters.length === 2 && <Button>Batalhar</Button>}
           </div>
         </CardHeader>
         <CardContent>
           <MonstersTable monsters={monsters}
             headers={headers} 
-            handleRemoveMonster={handleRemoveMonster} />
+            handleRemoveMonster={handleRemoveMonster} 
+            handleSelectMonster={handleSelectMonster}
+            selectedMonsters={selectedMonsters.length}
+          />
+            
         </CardContent>
       </Card>
 
