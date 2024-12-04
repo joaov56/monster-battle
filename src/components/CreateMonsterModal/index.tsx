@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+
+import { v4 as uuidv4 } from 'uuid';
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
@@ -12,6 +15,7 @@ interface CreateMonsterModalProps {
 
 export function CreateMonsterModal({ open, onClose, onSubmit }: CreateMonsterModalProps) {
   const [monster, setMonster] = useState<Monster>({
+    id: uuidv4(),
     name: '',
     attack: 0,
     defense: 0,

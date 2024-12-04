@@ -1,4 +1,5 @@
 interface Monster {
+    id: string;
     name: string;
     attack: number;
     defense: number;

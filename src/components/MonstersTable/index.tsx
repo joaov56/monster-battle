@@ -1,3 +1,4 @@
+'use client'
 import {
     Table,
     TableBody,
@@ -7,13 +8,16 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { TrashIcon } from "lucide-react"
 
 export function MonstersTable({
     monsters,
-    headers
+    headers,
+    handleRemoveMonster
 } : {
     monsters: Monster[],
-    headers: string[]
+    headers: string[],
+    handleRemoveMonster: (id: string) => void
 }){
     return (
         <Table>
@@ -23,6 +27,7 @@ export function MonstersTable({
                     {headers.map((header) => (
                         <TableHead key={header}>{header.toLocaleUpperCase()}</TableHead>
                     ))}
+                    <TableHead></TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -31,6 +36,7 @@ export function MonstersTable({
                         {headers.map((header) => (
                             <TableCell key={header}>{monster[header as keyof Monster]}</TableCell>
                         ))}
+                        <TableCell className="cursor-pointer"><TrashIcon onClick={()=> handleRemoveMonster(monster.id)}/></TableCell>
                     </TableRow>
                 ))}
             </TableBody>
