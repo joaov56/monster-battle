@@ -74,10 +74,19 @@ export default function Home() {
   }
 
   function handleSelectMonster(id:string){   
+    if(selectedMonsters.find(monster => monster.id === id)){
+      setSelectedMonsters(selectedMonsters.filter(monster => monster.id !== id));
+      return;
+    }
     const monster = monsters.find(monster => monster.id === id);
     if(monster){
       setSelectedMonsters([...selectedMonsters, monster]);
     }
+  }
+
+  function startBattle(){
+    battle(selectedMonsters[0], selectedMonsters[1]);
+    setSelectedMonsters([])
   }
 
   return (
@@ -88,11 +97,7 @@ export default function Home() {
           <div className="flex items-center">
             <InfoTooltip />
             <Button onClick={handleModalChange} className="mr-4">Adicionar +</Button>
-            {selectedMonsters.length === 2 && <Button onClick={()=> {
-              battle(selectedMonsters[0], selectedMonsters[1])
-              setSelectedMonsters([])
-            }
-            }>Batalhar</Button>}
+            {selectedMonsters.length === 2 && <Button onClick={startBattle}>Batalhar</Button>}
           </div>
         </CardHeader>
         <CardContent>
