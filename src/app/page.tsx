@@ -7,10 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+
 import { MonstersTable } from "@/components/MonstersTable";
 import { Button } from "@/components/ui/button";
 import { CreateMonsterModal } from "@/components/CreateMonsterModal";
 import { v4 as uuidv4 } from 'uuid';
+import { InfoTooltip } from "@/components/InfoTooltip";
 
 export default function Home() {
   const [monsters, setMonsters] = useState<Monster[]>([
@@ -74,7 +76,10 @@ export default function Home() {
       <Card className="w-4/5 h-3/5">
         <CardHeader  className="flex flex-row justify-between">
           <CardTitle>Monstros</CardTitle>
-          <Button onClick={handleModalChange}>Adicionar +</Button>
+          <div className="flex items-center">
+            <InfoTooltip />
+            <Button onClick={handleModalChange}>Adicionar +</Button>
+          </div>
         </CardHeader>
         <CardContent>
           <MonstersTable monsters={monsters}
