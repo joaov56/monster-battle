@@ -3,7 +3,7 @@ function calculateDamage(attack: number, defense: number): number {
     return damage > 0 ? damage : 1;
   }
   
-export function battle(monster1: Monster, monster2: Monster): string {
+export function battle(monster1: Monster, monster2: Monster): string[] {
     const rounds: string[] = [];
     let firstAttacker: Monster;
     let secondAttacker: Monster;
@@ -23,7 +23,7 @@ export function battle(monster1: Monster, monster2: Monster): string {
       const damage1 = calculateDamage(firstAttacker.attack, secondAttacker.defense);
       secondAttacker.hp -= damage1;
       rounds.push(
-        `${firstAttacker.name} attacks ${secondAttacker.name} and deals ${damage1} damage. ${secondAttacker.name} has ${Math.max(secondAttacker.hp, 0)} HP left.`
+        `${firstAttacker.name} atacou ${secondAttacker.name} e deu ${damage1} de dano. ${secondAttacker.name} tem ${Math.max(secondAttacker.hp, 0)} de vida restante.`
       );
   
       if (secondAttacker.hp <= 0) break;
@@ -31,13 +31,14 @@ export function battle(monster1: Monster, monster2: Monster): string {
       const damage2 = calculateDamage(secondAttacker.attack, firstAttacker.defense);
       firstAttacker.hp -= damage2;
       rounds.push(
-        `${secondAttacker.name} attacks ${firstAttacker.name} and deals ${damage2} damage. ${firstAttacker.name} has ${Math.max(firstAttacker.hp, 0)} HP left.`
+        `${secondAttacker.name} atacou ${firstAttacker.name} e deu ${damage2} de dano. ${firstAttacker.name} tem ${Math.max(firstAttacker.hp, 0)} de vida restante.`
       );
     }
   
     const winner = monster1.hp > 0 ? monster1.name : monster2.name;
   
     console.log(rounds.join("\n"));
-    return `${winner} wins the battle!`;
+    rounds.push(winner);
+    return rounds;
   }
   

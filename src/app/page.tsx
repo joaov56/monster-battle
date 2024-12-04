@@ -6,6 +6,7 @@ import { MonstersTable } from "@/components/MonstersTable";
 import { CreateMonsterModal } from "@/components/CreateMonsterModal";
 import { InfoTooltip } from "@/components/InfoTooltip";
 import { useMonstersManagement } from "./hooks/useMonstersManagement";
+import { BattleLogsModal } from "@/components/BattleLogsModal";
 
 export default function Home() {
   const {
@@ -16,7 +17,10 @@ export default function Home() {
     createNewMonster,
     removeMonster,
     selectMonster,
-    startBattle
+    startBattle,
+    battleLogsModalOpen,
+    toggleBattleLogsModal,
+    battleLogs
   } = useMonstersManagement();
 
   const headers = ["name", "attack", "defense", "speed", "hp"];
@@ -46,6 +50,12 @@ export default function Home() {
           />
         </CardContent>
       </Card>
+
+      <BattleLogsModal open={battleLogsModalOpen}
+        onClose={toggleBattleLogsModal}
+        logs={battleLogs}
+        winner={battleLogs[battleLogs.length - 1]}
+      />
 
       <CreateMonsterModal
         onClose={toggleModal}

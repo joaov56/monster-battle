@@ -33,6 +33,9 @@ export const useMonstersManagement = () => {
     }
   ]);
 
+  const [battleLogs, setBattleLogs] = useState<string[]>([]);
+  const [battleLogsModalOpen, setBattleLogsModalOpen] = useState<boolean>(false);
+
   const [selectedMonsters, setSelectedMonsters] = useState<Monster[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -72,10 +75,19 @@ export const useMonstersManagement = () => {
 
   const startBattle = () => {
     if (selectedMonsters.length === 2) {
-      battle(selectedMonsters[0], selectedMonsters[1]);
+      const battleLogs = battle(selectedMonsters[0], selectedMonsters[1]);
       setSelectedMonsters([]);
+      setBattleLogs(battleLogs);
+      setBattleLogsModalOpen(true);
     }
   };
+
+  const resetLogs = ()=> {
+    setBattleLogs([]);
+    setBattleLogsModalOpen(false);
+  }
+
+  const toggleBattleLogsModal = () => setBattleLogsModalOpen(prev => !prev);
 
   return {
     monsters,
@@ -85,6 +97,10 @@ export const useMonstersManagement = () => {
     createNewMonster,
     removeMonster,
     selectMonster,
-    startBattle
+    startBattle,
+    battleLogs,
+    battleLogsModalOpen,
+    toggleBattleLogsModal,
+    resetLogs,
   };
 };
