@@ -32,7 +32,7 @@ export function CreateMonsterModal({ open, onClose, onSubmit }: CreateMonsterMod
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {    
     e.preventDefault();
     if (!monster.name) {
       alert('Please provide a name.');

@@ -52,7 +52,7 @@ export default function Home() {
   }
 
   function handleCreateNewMonster(monster: Partial<Monster>): Monster {
-    return {
+    setMonsters([...monsters, {
       id: uuidv4(),
       name: monster.name || '',
       attack: monster.attack || 0,
@@ -60,7 +60,8 @@ export default function Home() {
       speed: monster.speed || 0,
       hp: monster.hp || 0,
       image_url: monster.image_url || '',
-    };
+    }]);
+    return monster as Monster;
   }
   
 
