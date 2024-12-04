@@ -10,7 +10,6 @@ import {
   } from "@/components/ui/table"
 import { TrashIcon } from "lucide-react"
 import { Checkbox } from "../ui/checkbox"
-import { useState } from "react"
 
 export function MonstersTable({
     monsters,
@@ -22,10 +21,9 @@ export function MonstersTable({
     monsters: Monster[],
     headers: string[],
     handleRemoveMonster: (id: string) => void,
-    selectedMonsters: number,
+    selectedMonsters: Monster[],
     handleSelectMonster: (id: string) => void
 }){
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState<string[]>([]);
     return (
         <Table>
             <TableCaption>A lista de monstros disponíveis</TableCaption>
@@ -44,10 +42,12 @@ export function MonstersTable({
                         <TableCell>
                             <Checkbox 
                                 onClick={()=> {
-                                    handleSelectMonster(monster.id);
-                                    setSelectedCheckboxes([...selectedCheckboxes, monster.id]);
+                                    handleSelectMonster(monster.id);                 
                                 }} 
-                                disabled={selectedMonsters === 2 && !selectedCheckboxes.includes(monster.id)}
+                                disabled={selectedMonsters.length === 2 
+                                && !selectedMonsters.find((selectedMonster) => selectedMonster.id === monster.id)}
+
+                                checked={selectedMonsters.find((selectedMonster) => selectedMonster.id === monster.id) !== undefined}
                             />
                         </TableCell>
                         {headers.map((header) => (

@@ -36,8 +36,7 @@ export function battle(monster1: Monster, monster2: Monster): string[] {
     }
   
     const winner = monster1.hp > 0 ? monster1.name : monster2.name;
-  
-    console.log(rounds.join("\n"));
+    
     rounds.push(winner);
     return rounds;
   }

@@ -46,7 +46,7 @@ export default function Home() {
             headers={headers} 
             handleRemoveMonster={removeMonster} 
             handleSelectMonster={selectMonster}
-            selectedMonsters={selectedMonsters.length}
+            selectedMonsters={selectedMonsters}
           />
         </CardContent>
       </Card>
