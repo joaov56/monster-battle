@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { CreateMonsterModal } from "@/components/CreateMonsterModal";
 import { v4 as uuidv4 } from 'uuid';
 import { InfoTooltip } from "@/components/InfoTooltip";
+import { battle } from "./utils/battle";
 
 export default function Home() {
   const [monsters, setMonsters] = useState<Monster[]>([
@@ -68,7 +69,6 @@ export default function Home() {
     return monster as Monster;
   }
   
-
   function handleRemoveMonster(id: string){
     setMonsters(monsters.filter(monster => monster.id !== id));
   }
@@ -88,7 +88,11 @@ export default function Home() {
           <div className="flex items-center">
             <InfoTooltip />
             <Button onClick={handleModalChange} className="mr-4">Adicionar +</Button>
-            {selectedMonsters.length === 2 && <Button>Batalhar</Button>}
+            {selectedMonsters.length === 2 && <Button onClick={()=> {
+              battle(selectedMonsters[0], selectedMonsters[1])
+              setSelectedMonsters([])
+            }
+            }>Batalhar</Button>}
           </div>
         </CardHeader>
         <CardContent>
@@ -102,7 +106,11 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <CreateMonsterModal onClose={handleModalChange} open={isOpen} onSubmit={handleCreateNewMonster}/>
+      <CreateMonsterModal
+        onClose={handleModalChange}
+        open={isOpen}
+        onSubmit={handleCreateNewMonster}
+      />
     </div>
   );
 }
